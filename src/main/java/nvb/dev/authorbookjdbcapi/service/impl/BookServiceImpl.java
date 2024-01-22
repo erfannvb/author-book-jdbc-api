@@ -1,7 +1,9 @@
 package nvb.dev.authorbookjdbcapi.service.impl;
 
 import lombok.AllArgsConstructor;
+import nvb.dev.authorbookjdbcapi.dao.AuthorDao;
 import nvb.dev.authorbookjdbcapi.dao.BookDao;
+import nvb.dev.authorbookjdbcapi.domain.Author;
 import nvb.dev.authorbookjdbcapi.domain.Book;
 import nvb.dev.authorbookjdbcapi.service.BookService;
 import org.springframework.stereotype.Service;
@@ -13,11 +15,17 @@ import java.util.Optional;
 @AllArgsConstructor
 public class BookServiceImpl implements BookService {
 
+    private final AuthorDao authorDao;
     private final BookDao bookDao;
 
     @Override
     public void saveBook(Book book) {
-        bookDao.create(book);
+        Optional<Author> optionalAuthor = authorDao.findById(book.getAuthorId());
+        if (optionalAuthor.isPresent()) {
+            bookDao.create(book);
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
