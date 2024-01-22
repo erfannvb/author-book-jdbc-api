@@ -19,7 +19,7 @@ public class BookDaoImpl implements BookDao {
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public void saveBook(Book book) {
+    public void create(Book book) {
         jdbcTemplate.update("INSERT INTO tbl_book(isbn, title, author_id) VALUES (?, ?, ?)",
                 book.getIsbn(),
                 book.getTitle(),
@@ -28,19 +28,19 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public Optional<Book> findBookById(long id) {
+    public Optional<Book> findById(long id) {
         List<Book> query = jdbcTemplate.query("SELECT * FROM tbl_book WHERE id = ?",
                 new BookRowMapper(), id);
         return query.stream().findFirst();
     }
 
     @Override
-    public List<Book> findAllBooks() {
+    public List<Book> findAll() {
         return jdbcTemplate.query("SELECT * FROM tbl_book", new BookRowMapper());
     }
 
     @Override
-    public void updateBook(long id, Book book) {
+    public void update(long id, Book book) {
         jdbcTemplate.update("UPDATE tbl_book SET id=?, isbn=?, title=?, author_id=? WHERE id=?",
                 book.getId(),
                 book.getIsbn(),
@@ -50,7 +50,7 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public void deleteBookById(long id) {
+    public void deleteById(long id) {
         jdbcTemplate.update("DELETE FROM tbl_book WHERE id = ?", id);
     }
 

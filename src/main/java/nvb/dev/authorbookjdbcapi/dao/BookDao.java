@@ -7,14 +7,14 @@ import java.util.Optional;
 
 public interface BookDao {
 
-    void saveBook(Book book);
+    void create(Book book);
 
-    Optional<Book> findBookById(long id);
+    Optional<Book> findById(long id);
 
-    List<Book> findAllBooks();
+    List<Book> findAll();
 
-    void updateBook(long id, Book book);
+    void update(long id, Book book);
 
-    void deleteBookById(long id);
+    void deleteById(long id);
 
 }

@@ -35,7 +35,7 @@ class AuthorDaoTest {
     void testThatSaveAuthorGeneratesCorrectSql() {
         Author author = createTestAuthor();
 
-        authorDao.saveAuthor(author);
+        authorDao.create(author);
 
         verify(jdbcTemplate).update(
                 eq("INSERT INTO tbl_author(name, age) VALUES (?, ?)"),
@@ -48,7 +48,7 @@ class AuthorDaoTest {
     void testThatFindAuthorByIdGeneratesCorrectSql() {
         Author author = createTestAuthor();
 
-        authorDao.findAuthorById(author.getId());
+        authorDao.findById(author.getId());
 
         verify(jdbcTemplate).query(
                 eq("SELECT * FROM tbl_author WHERE id = ?"),
@@ -59,7 +59,7 @@ class AuthorDaoTest {
 
     @Test
     void testThatFindAllAuthorsGeneratesCorrectSql() {
-        authorDao.findAllAuthors();
+        authorDao.findAll();
 
         verify(jdbcTemplate).query(
                 eq("SELECT * FROM tbl_author"),
@@ -71,7 +71,7 @@ class AuthorDaoTest {
     void testThatUpdateAuthorGeneratesCorrectSql() {
         Author author = createTestAuthor();
 
-        authorDao.updateAuthor(author.getId(), author);
+        authorDao.update(author.getId(), author);
 
         verify(jdbcTemplate).update(
                 eq("UPDATE tbl_author SET id = ?, name = ?, age = ? WHERE id = ?"),
@@ -83,7 +83,7 @@ class AuthorDaoTest {
 
     @Test
     void testThatDeleteAuthorByIdGeneratesCorrectSql() {
-        authorDao.deleteAuthorById(1L);
+        authorDao.deleteById(1L);
 
         verify(jdbcTemplate).update(
                 eq("DELETE FROM tbl_author WHERE id = ?"),

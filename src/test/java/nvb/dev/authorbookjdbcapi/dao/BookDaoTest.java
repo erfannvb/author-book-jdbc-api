@@ -33,7 +33,7 @@ class BookDaoTest {
 
     @Test
     void testThatSaveBookGeneratesCorrectSql() {
-        bookDao.saveBook(createTestBook());
+        bookDao.create(createTestBook());
 
         verify(jdbcTemplate).update(
                 eq("INSERT INTO tbl_book(isbn, title, author_id) VALUES (?, ?, ?)"),
@@ -45,7 +45,7 @@ class BookDaoTest {
 
     @Test
     void testThatFindBookByIdGeneratesCorrectSql() {
-        bookDao.findBookById(1L);
+        bookDao.findById(1L);
 
         verify(jdbcTemplate).query(
                 eq("SELECT * FROM tbl_book WHERE id = ?"),
@@ -56,7 +56,7 @@ class BookDaoTest {
 
     @Test
     void testThatFindAllBooksGeneratesCorrectSql() {
-        bookDao.findAllBooks();
+        bookDao.findAll();
 
         verify(jdbcTemplate).query(
                 eq("SELECT * FROM tbl_book"),
@@ -66,7 +66,7 @@ class BookDaoTest {
 
     @Test
     void testThatUpdateBookGeneratesCorrectSql() {
-        bookDao.updateBook(1L, createTestBook());
+        bookDao.update(1L, createTestBook());
 
         verify(jdbcTemplate).update(
                 eq("UPDATE tbl_book SET id=?, isbn=?, title=?, author_id=? WHERE id=?"),
@@ -80,7 +80,7 @@ class BookDaoTest {
 
     @Test
     void testThatDeleteBookByIdGeneratesCorrectSql() {
-        bookDao.deleteBookById(1L);
+        bookDao.deleteById(1L);
 
         verify(jdbcTemplate).update(
                 eq("DELETE FROM tbl_book WHERE id = ?"),

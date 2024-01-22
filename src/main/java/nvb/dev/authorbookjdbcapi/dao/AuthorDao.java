@@ -7,14 +7,14 @@ import java.util.Optional;
 
 public interface AuthorDao {
 
-    void saveAuthor(Author author);
+    void create(Author author);
 
-    Optional<Author> findAuthorById(long id);
+    Optional<Author> findById(long id);
 
-    List<Author> findAllAuthors();
+    List<Author> findAll();
 
-    void updateAuthor(long id, Author author);
+    void update(long id, Author author);
 
-    void deleteAuthorById(long id);
+    void deleteById(long id);
 
 }
