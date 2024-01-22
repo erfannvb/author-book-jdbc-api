@@ -20,8 +20,7 @@ public class AuthorDaoImpl implements AuthorDao {
 
     @Override
     public void saveAuthor(Author author) {
-        jdbcTemplate.update("INSERT INTO tbl_author(id, name, age) VALUES (?, ?, ?)",
-                author.getId(),
+        jdbcTemplate.update("INSERT INTO tbl_author(name, age) VALUES (?, ?)",
                 author.getName(),
                 author.getAge()
         );

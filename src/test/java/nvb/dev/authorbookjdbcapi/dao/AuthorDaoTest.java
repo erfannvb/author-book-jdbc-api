@@ -38,8 +38,7 @@ class AuthorDaoTest {
         authorDao.saveAuthor(author);
 
         verify(jdbcTemplate).update(
-                eq("INSERT INTO tbl_author(id, name, age) VALUES (?, ?, ?)"),
-                eq(1L),
+                eq("INSERT INTO tbl_author(name, age) VALUES (?, ?)"),
                 eq("John Doe"),
                 eq(35)
         );
