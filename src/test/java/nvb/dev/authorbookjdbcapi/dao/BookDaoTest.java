@@ -69,8 +69,7 @@ class BookDaoTest {
         bookDao.update(1L, createTestBook());
 
         verify(jdbcTemplate).update(
-                eq("UPDATE tbl_book SET id=?, isbn=?, title=?, author_id=? WHERE id=?"),
-                eq(1L),
+                eq("UPDATE tbl_book SET isbn=?, title=?, author_id=? WHERE id=?"),
                 eq("123-456"),
                 eq("You"),
                 eq(1L),

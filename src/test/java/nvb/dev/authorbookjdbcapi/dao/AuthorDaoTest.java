@@ -74,10 +74,10 @@ class AuthorDaoTest {
         authorDao.update(author.getId(), author);
 
         verify(jdbcTemplate).update(
-                eq("UPDATE tbl_author SET id = ?, name = ?, age = ? WHERE id = ?"),
-                eq(1L),
+                eq("UPDATE tbl_author SET name = ?, age = ? WHERE id = ?"),
                 eq("John Doe"),
-                eq(35)
+                eq(35),
+                eq(1L)
         );
     }
 

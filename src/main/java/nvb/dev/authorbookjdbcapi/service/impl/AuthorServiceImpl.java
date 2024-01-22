@@ -46,7 +46,7 @@ public class AuthorServiceImpl implements AuthorService {
             currentAuthor.setName(author.getName());
             currentAuthor.setAge(author.getAge());
 
-            authorDao.create(currentAuthor);
+            authorDao.update(id, currentAuthor);
 
         } else {
             throw new IllegalArgumentException();

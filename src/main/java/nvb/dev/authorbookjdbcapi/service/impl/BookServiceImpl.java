@@ -47,7 +47,7 @@ public class BookServiceImpl implements BookService {
             currentBook.setTitle(book.getTitle());
             currentBook.setAuthorId(book.getAuthorId());
 
-            bookDao.create(currentBook);
+            bookDao.update(id, currentBook);
 
         } else {
             throw new IllegalArgumentException();
