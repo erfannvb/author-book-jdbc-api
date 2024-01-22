@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import nvb.dev.authorbookjdbcapi.domain.Book;
 import nvb.dev.authorbookjdbcapi.service.BookService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,23 +18,23 @@ public class BookController {
 
     private final BookService bookService;
 
-    @PostMapping("/book")
+    @PostMapping(value = "/book", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpStatus> saveBook(@RequestBody Book book) {
         bookService.saveBook(book);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping("/book/{bookId}")
+    @GetMapping(value = "/book/{bookId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Optional<Book>> findBookById(@PathVariable long bookId) {
         return new ResponseEntity<>(bookService.findBookById(bookId), HttpStatus.OK);
     }
 
-    @GetMapping("/book/all")
+    @GetMapping(value = "/book/all", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Book>> findAllBooks() {
         return new ResponseEntity<>(bookService.findAllBooks(), HttpStatus.OK);
     }
 
-    @PutMapping("/book/{bookId}")
+    @PutMapping(value = "/book/{bookId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpStatus> updateBook(@PathVariable long bookId, @RequestBody Book book) {
         bookService.updateBook(bookId, book);
         return new ResponseEntity<>(HttpStatus.OK);
